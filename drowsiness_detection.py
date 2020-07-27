@@ -4,6 +4,8 @@ from keras.models import load_model
 import numpy as np
 from pygame import mixer
 import time
+import requests
+from twilio.rest import Client
 
 
 mixer.init()
@@ -98,6 +100,27 @@ while(True):
             thicc=thicc-2
             if(thicc<2):
                 thicc=2
+#------------------------------------------------------
+        ipinfo = requests.get("https://ipinfo.io/")
+        print(ipinfo.text)
+
+        loc = geocoder.ip('me')
+        print("Latitude, longitude = ", loc.latlng)
+
+
+        account_sid = 'AC4553a2845e92bc9eed3ca10210deade4'
+        auth_token = 'd7c7c604b688b5f7544f168592eb909e'
+        client = Client(account_sid, auth_token)
+
+        message = client.messages \
+            .create(
+                 body=loc.latlng,
+                 from_='+4155238886',
+                 to='+918308298646'
+             )
+
+        print(message.sid)
+#-------------------------------------------------------
         cv2.rectangle(frame,(0,0),(width,height),(0,0,255),thicc) 
         for (x,y,w,h) in faces:
  	       cv2.rectangle(frame,(x,y),(x+w,y+h),(0,0,255),thicc)
