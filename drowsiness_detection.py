@@ -108,15 +108,15 @@ while(True):
         print("Latitude, longitude = ", loc.latlng)
 
 
-        account_sid = 'AC4553a2845e92bc9eed3ca10210deade4'
-        auth_token = 'd7c7c604b688b5f7544f168592eb909e'
+        account_sid = 'Add your account sid'
+        auth_token = 'Add your token'
         client = Client(account_sid, auth_token)
 
         message = client.messages \
             .create(
                  body=loc.latlng,
-                 from_='+4155238886',
-                 to='+918308298646'
+                 from_='You need to buy a number',
+                 to='+Your number'
              )
 
         print(message.sid)
